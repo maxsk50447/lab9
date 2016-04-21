@@ -17,9 +17,7 @@ public class ConverterUI extends JFrame{
 	private Boolean isLeftToRight = true;
 	public ConverterUI(UnitConverter uc){
 		this.unitConverter = uc;
-		
 		this.setTitle("Distance Converter");
-		
 		initComponents();
 	}
 	
@@ -55,6 +53,7 @@ public class ConverterUI extends JFrame{
 		contents.setVisible(true);
 		contents.setResizable(false);
 		contents.setBounds(0,0,670,100);
+		contents.getRootPane().setDefaultButton(convertButton);
 		
 		clearButton.addActionListener(new ClearButtonListener());
 		
@@ -84,7 +83,6 @@ public class ConverterUI extends JFrame{
 			inputField1.setEditable(true);
 			inputField2.setEditable(false);
 		}
-		
 	}
 	class RightListener implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
@@ -93,7 +91,6 @@ public class ConverterUI extends JFrame{
 			inputField1.setEditable(false);
 			inputField2.setEditable(true);
 		}
-		
 	}
 	private void convert(){
 		String s;
