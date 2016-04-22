@@ -24,7 +24,7 @@ public class ConverterUI extends JFrame{
 	private void initComponents(){
 		unit1ComboBox = new JComboBox<Length>();
 		Length [] lengths = unitConverter.getUnits();
-//		for(Length u: lengths) unit1ComboBox.addItem(u);;
+
 		
 		unit1ComboBox = new JComboBox(lengths);
 		unit2ComboBox = new JComboBox(lengths);
@@ -36,12 +36,14 @@ public class ConverterUI extends JFrame{
 		contents = new JFrame();
 		leftButton = new JRadioButton("Left->Right", true);
 		rightButton = new JRadioButton("Right->Left", false);
-		contents.add(leftButton);
-		contents.add(rightButton);
+		
 		contents.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		
 		radioButtonGroup.add(leftButton);
 		radioButtonGroup.add(rightButton);
 		
+		contents.add(leftButton);
+		contents.add(rightButton);
 		contents.setLayout(new FlowLayout());
 		contents.add(inputField1);
 		contents.add(unit1ComboBox);
@@ -50,20 +52,28 @@ public class ConverterUI extends JFrame{
 		contents.add(unit2ComboBox);
 		contents.add(convertButton);
 		contents.add(clearButton);
+		contents.add(leftButton);
+		contents.add(rightButton);
+		
 		contents.setVisible(true);
 		contents.setResizable(false);
 		contents.setBounds(0,0,670,100);
+		
 		contents.getRootPane().setDefaultButton(convertButton);
 		
+		inputField1.addKeyListener(new AutoDetectedListener());
+		inputField2.addKeyListener(new AutoDetectedListener());
+		
 		clearButton.addActionListener(new ClearButtonListener());
-		
-		
 		leftButton.addActionListener(new LeftListener());
-		
 		rightButton.addActionListener(new RightListener());
 		convertButton.addActionListener(new ConvertButtonListener());
-		contents.add(leftButton);
-		contents.add(rightButton);
+		
+		
+	}class AutoDetectedListener implements KeyListener{
+		public void keyPressed(KeyEvent e) {}
+		public void keyReleased(KeyEvent e) {convert();}
+		public void keyTyped(KeyEvent e) {}
 	}
 	class ClearButtonListener implements ActionListener{
 		public void actionPerformed(ActionEvent e){
@@ -111,7 +121,7 @@ public class ConverterUI extends JFrame{
 				exception.printStackTrace();
 			}
 		}
-}
+	}
 	public static void main(String[] args) {
 		ConverterUI test = new ConverterUI(new UnitConverter());
 	}
