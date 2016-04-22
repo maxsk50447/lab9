@@ -1,7 +1,11 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-
+/**
+ * Graphics User Interface of Conventer
+ * @author Lab9_Patipol_Wangjaitham_5810545432
+ *
+ */
 public class ConverterUI extends JFrame{
 	private JButton convertButton;
 	private JButton clearButton;
@@ -20,10 +24,12 @@ public class ConverterUI extends JFrame{
 		this.setTitle("Distance Converter");
 		initComponents();
 	}
-	
+	/**
+	 * initialize everything
+	 */
 	private void initComponents(){
 		unit1ComboBox = new JComboBox<Length>();
-		Length [] lengths = unitConverter.getUnits();
+		Unit [] lengths = unitConverter.getUnits();
 
 		
 		unit1ComboBox = new JComboBox(lengths);
@@ -70,22 +76,37 @@ public class ConverterUI extends JFrame{
 		convertButton.addActionListener(new ConvertButtonListener());
 		
 		
-	}class AutoDetectedListener implements KeyListener{
+	}
+	/*
+	 * AutoDetectedListener use for add to inputField1 and inputField2 to make it
+	 * auto-detected when released from keyboard it will call convert.
+	 */
+	class AutoDetectedListener implements KeyListener{
 		public void keyPressed(KeyEvent e) {}
 		public void keyReleased(KeyEvent e) {convert();}
 		public void keyTyped(KeyEvent e) {}
 	}
+	/*
+	 * ClearButtonListener use for add to clearButton to make it clear
+	 */
 	class ClearButtonListener implements ActionListener{
 		public void actionPerformed(ActionEvent e){
 			inputField1.setText("");
 			inputField2.setText("");
 		}
 	}
+	/*
+	 * ConverButtonListener use for add to convertButton to make it call convert;
+	 */
 	class ConvertButtonListener implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			convert();
 		}
 	}
+	/*
+	 * LeftListtener use for add to leftButton when click Left -> Right it will disable
+	 * inputField2 and enable inputField1
+	 */
 	class LeftListener implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			convert();
@@ -94,6 +115,10 @@ public class ConverterUI extends JFrame{
 			inputField2.setEditable(false);
 		}
 	}
+	/*
+	 * RightListtener use for add to rightButton when click Right -> Left it will disable
+	 * inputField1 and enable inputField2
+	 */
 	class RightListener implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			convert();
@@ -102,6 +127,10 @@ public class ConverterUI extends JFrame{
 			inputField2.setEditable(true);
 		}
 	}
+	/**
+	 * Convert use to convert the number that input from 1 unit to other unit and then
+	 * it will show the result in other TextField.
+	 */
 	private void convert(){
 		String s;
 		if(isLeftToRight) s = inputField1.getText().trim();
@@ -110,11 +139,11 @@ public class ConverterUI extends JFrame{
 			try{
 				if(isLeftToRight){
 					double value = Double.valueOf(s);
-					double result = unitConverter.convert(value, (Length)unit1ComboBox.getSelectedItem(), (Length)unit2ComboBox.getSelectedItem());	
+					double result = unitConverter.convert(value, (Unit)unit1ComboBox.getSelectedItem(), (Unit)unit2ComboBox.getSelectedItem());	
 					inputField2.setText(result + "");	
 				}else{
 					double value = Double.valueOf(s);
-					double result = unitConverter.convert(value, (Length)unit2ComboBox.getSelectedItem(), (Length)unit1ComboBox.getSelectedItem());	
+					double result = unitConverter.convert(value, (Unit)unit2ComboBox.getSelectedItem(), (Unit)unit1ComboBox.getSelectedItem());	
 					inputField1.setText(result + "");
 				}
 			}catch(NumberFormatException exception){
@@ -122,6 +151,10 @@ public class ConverterUI extends JFrame{
 			}
 		}
 	}
+	/**
+	 * Main method to make Graphics User Interfaced run
+	 * 
+	 */
 	public static void main(String[] args) {
 		ConverterUI test = new ConverterUI(new UnitConverter());
 	}

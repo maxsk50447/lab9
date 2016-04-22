@@ -1,4 +1,8 @@
-
+/**
+ * 
+ * Application to test that UnitConventer can use
+ *
+ */
 public class ConverterApp {
 	public static void main(String[] args) {
 		for(Length x : Length.values()){
