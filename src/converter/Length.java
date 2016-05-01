@@ -46,5 +46,5 @@ public enum Length implements Unit{
 	 * Gets the name from unit you choose
 	 * @return name of the unit
 	 */
-	public String getName(){ return name; }
+	public String toString(){ return name; }
 }
