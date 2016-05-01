@@ -1,4 +1,10 @@
+package gui;
 import javax.swing.*;
+
+import converter.Length;
+import converter.Unit;
+import converter.UnitConverter;
+
 import java.awt.*;
 import java.awt.event.*;
 /**
